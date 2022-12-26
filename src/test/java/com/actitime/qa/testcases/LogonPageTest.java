@@ -10,10 +10,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
+
 public class LogonPageTest extends TestBase {
 
     LoginPage loginPage;
-    HomePage homePage;
     String sheetName = "Users";
     TestUtil testUtil;
 
@@ -32,8 +33,9 @@ public class LogonPageTest extends TestBase {
 
 
     @Test(priority = 1)
-    public void loginPageLogoTest() {
+    public void loginPageLogoTest() throws IOException {
         boolean flag = loginPage.validateActiTimeLogo();
+        TestUtil.takeScreenshotAtEndOfTest("loginPageLogoTest");
         Assert.assertTrue(flag);
 
     }
@@ -46,8 +48,10 @@ public class LogonPageTest extends TestBase {
     }
 
     @Test(priority = 2, dataProvider = "getactiTimeTestData")
-    public void LoginTest(String userName, String password) {
-        homePage = loginPage.loging(userName, password);
+    public void LoginTest(String userName, String password) throws IOException {
+        String loggedInUserName = loginPage.loging(userName, password);
+        TestUtil.takeScreenshotAtEndOfTest("LoginTest");
+        Assert.assertFalse(loggedInUserName.isEmpty());
     }
 
 

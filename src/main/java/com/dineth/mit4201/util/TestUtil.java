@@ -20,7 +20,7 @@ public class TestUtil extends TestBase {
     public static long IMPLICIT_WAIT = 40;
 
 
-    public static String TESTDATA_SHEET_PATH = "src/main/java/com/dineth/mit4202/testdata/actitimeTestData.xlsx";
+    public static String TESTDATA_SHEET_PATH = "src/main/java/com/dineth/mit4201/testdata/actitimeTestData.xlsx";
 
     static Workbook book;
     static Sheet sheet;
@@ -53,9 +53,9 @@ public class TestUtil extends TestBase {
     }
 
 
-    public static void takeScreenshotAtEndOfTest() throws IOException {
+    public static void takeScreenshotAtEndOfTest(String testCaseName) throws IOException {
         File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         String currentDir = System.getProperty("user.dir");
-        FileUtils.copyFile(scrFile, new File(currentDir + "/screenshots/" + System.currentTimeMillis() + ".png"));
+        FileUtils.copyFile(scrFile, new File(currentDir + "/screenshots/" + System.currentTimeMillis() + "_" + testCaseName + ".png"));
     }
 }
